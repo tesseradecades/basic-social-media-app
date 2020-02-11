@@ -4,12 +4,8 @@ import CreatePost from './components/CreatePost';
 import Header from './components/Header';
 import Login from './components/Login';
 import PostList from './components/PostList';
-import postReducer from './reducer';
+import {PostContext, postReducer, UserContext} from './stateManagement';
 
-export const UserContext = React.createContext();
-export const PostContext = React.createContext({
-    posts: []
-});
 
 function App(){
     const [user, setUser] = React.useState('');

@@ -1,4 +1,11 @@
-function postReducer(state, action){
+import React from 'react';
+
+export const UserContext = React.createContext();
+export const PostContext = React.createContext({
+    posts: []
+});
+
+export function postReducer(state, action){
     switch(action.type){
         case "ADD_POST":{
             const newPost = action.payload.post;

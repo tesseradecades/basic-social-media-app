@@ -1,5 +1,5 @@
 import React from 'react';
-import {UserContext, PostContext} from '../App';
+import {UserContext, PostContext} from '../stateManagement';
 
 function Post({image, content, user, id}){
     const currentUser = React.useContext(UserContext);
