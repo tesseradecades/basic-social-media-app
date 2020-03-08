@@ -1,18 +1,17 @@
 import React from 'react';
-import { PostContext } from '../stateManagement';
+import { PostContext, PostReducerCommand } from '../post';
 
-function CreatePost({user}){
+function CreatePost({user}:{user:string}){
     const {dispatch} = React.useContext(PostContext)
     const [content, setContent] =  React.useState('');
-    const [image, setImage] = React.useState(null);
+    const [image, setImage] = React.useState<File>(null!);
 
-    const imageInputRef = React.useRef();
+    const imageInputRef= React.useRef<HTMLInputElement>(null!);
 
-    function handleSubmit(event){
+    function handleSubmit(event: React.FormEvent){
         event.preventDefault();
         const post = { content, image, user, id:Date.now()};
-        //handleAddPost(post);
-        dispatch({type:"ADD_POST", payload:{post}});
+        dispatch({type:PostReducerCommand.ADD_POST, payload:{id:post.id,post:post}});
         setContent('');
         imageInputRef.current.value='';
     }
@@ -28,7 +27,7 @@ function CreatePost({user}){
                 />
                 <input
                     type="file"
-                    onChange={event => setImage(event.target.files[0])}
+                    onChange={event => setImage(event.target.files![0])}
                     ref={imageInputRef}
                 />
                 <button type="submit">Submit Post</button>

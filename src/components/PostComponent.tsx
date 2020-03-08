@@ -1,13 +1,14 @@
 import React from 'react';
-import {UserContext, PostContext} from '../stateManagement';
+import {IPost,PostContext, PostReducerCommand} from '../post';
+import {UserContext} from '../user'
 
-function Post({image, content, user, id}){
+function PostComponent({image, content, user, id}: IPost){
     const currentUser = React.useContext(UserContext);
     const {dispatch} = React.useContext(PostContext);
     const isCurrentUser = currentUser === user;
 
     function handleDeletePost(){
-        dispatch({type: "DELETE_POST", payload:{id}});
+        dispatch({type: PostReducerCommand.DELETE_POST, payload:{id, post:{} as IPost}});
     }
 
     return (
@@ -20,7 +21,7 @@ function Post({image, content, user, id}){
                 />
             )}
             <p>{content}</p>
-            <div style={{color: isCurrentUser && "green"}}>{user}</div>
+            <div style={{color: isCurrentUser && "green"} as React.CSSProperties}>{user}</div>
             <div>
                 {isCurrentUser && <button onClick={handleDeletePost}>Delete</button>}
             </div>
@@ -28,4 +29,4 @@ function Post({image, content, user, id}){
     );
 }
 
-export default Post
+export default PostComponent

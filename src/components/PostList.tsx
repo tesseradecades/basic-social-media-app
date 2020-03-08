@@ -1,8 +1,13 @@
 import React from 'react';
-import Post from './Post';
+import PostComponent from './PostComponent';
+import { PostState } from '../post';
 
-function PostList({posts}){
-    return posts.map( post=>(<Post key={post.id} {...post}/>));
+function PostList({posts}: {posts:PostState}){
+    return (
+        <>
+        {posts.posts.map( post=>(<PostComponent key={post.id} {...post}/>))}
+        </>
+    );
 }
 
 export default PostList
