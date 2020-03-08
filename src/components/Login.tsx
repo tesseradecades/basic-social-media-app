@@ -1,9 +1,9 @@
 import React from 'react';
 
-function Login({ setUser }){
+function Login({ setUser }: {setUser:React.Dispatch<React.SetStateAction<string>>}){
     const [username,setUsername] = React.useState('');
 
-    function handleSubmit(event){
+    function handleSubmit(event: React.FormEvent){
         event.preventDefault();
         setUser(username);
     }
